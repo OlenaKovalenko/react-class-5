@@ -1,10 +1,17 @@
+import { Route, Routes } from "react-router-dom";
+
 function App() {
 
   return (
     <>
-      <h1>Hello, world!</h1>
+      <Routes>
+        <Route path="">
+        <Route path=""/>
+        <Route path=""/>
+        </Route>
+      </Routes>
     </>
   );
 }
 
-export default App
+export default App;
