@@ -1,13 +1,29 @@
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
+import { useEffect, lazy } from "react";
+import Layout from "./Components/Layout";
+import { userInfo } from "./services/userInfo";
+
+// const Home = lazy(() => import("./pages/Home"));
+// const Rates = lazy(() => import("./pages/Rates"));
+const Home = lazy(() => import("./pages/Home"));
+const Rates = lazy(() => import("./pages/Rates"));
 
 function App() {
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition((pos) => {
+      const lat = pos.coords.latitude;
+      const long = pos.coords.longitude;
+      userInfo(lat, long);
+    });
+  }, []);
 
   return (
     <>
       <Routes>
-        <Route path="">
-        <Route path=""/>
-        <Route path=""/>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Home />} />
+          <Route path="/rates" element={<Rates />} />
+          <Route path="*" element={<Navigate to="/" />} />
         </Route>
       </Routes>
     </>
